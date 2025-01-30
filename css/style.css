@@ -1,20 +1,281 @@
-/* Centrage du contenu */
-html,
-body {
+/* Mode clair (par défaut) */
+html {
     height: 100%;
+    width: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(45deg, #d4d4d4, #e6bbb3);
+    background-size: cover;
+    /* Couvre toute la surface */
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+    /* Transition fluide */
 }
 
+/* Mode sombre - dark mode */
+html.dark-mode {
+    background-image: linear-gradient(45deg, #0a0a0a, #2c3e50);
+    /* Fond sombre */
+    background-size: cover;
+    /* Assure que le dégradé couvre toute la surface */
+    color: #fff;
+    /* Texte clair */
+}
+
+/* Isolation du contexte pour le body */
 body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent !important;
+    /* Fond transparent */
+}
+
+
+
+
+/* Modification de la carte */
+.card {
+    width: 190px;
+    height: 200px;
+    background-image: linear-gradient(45deg, #f2c9b6 0%, #ce8b56 100%);
+    /* Angle modifié */
+    border-radius: 50px;
+    transition: all .3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    /* Nouvelle propriété */
+    z-index: 1;
+    /* Nouvelle propriété */
+    overflow: hidden;
+    /* Nouvelle propriété */
+}
+
+/* Mode sombre */
+html.dark-mode .card {
+    background-image: linear-gradient(45deg, #333333 0%, #444444 100%);
+    /* Angle modifié */
+}
+
+/* Effet de survol pour la carte principale */
+.card:hover {
+    box-shadow: 0px 0px 30px 1px rgba(237, 86, 10, 0.3);
+    /* Ombre au survol */
+    transform: scale(1.05);
+    /* Agrandir légèrement */
+}
+
+/* Animation pour les gains */
+@keyframes bubblePop {
+    0% {
+        transform: scale(0.5);
+        /* Démarre petit */
+        opacity: 0;
+        /* Invisible au début */
+    }
+
+    50% {
+        transform: scale(1.3);
+        /* Grandit au maximum */
+        opacity: 1;
+        /* Devient visible */
+    }
+
+    70% {
+        transform: scale(1.1);
+        /* Petit rebond avant de revenir à la normale */
+    }
+
+    100% {
+        transform: scale(1);
+        /* Reviens à la taille normale */
+    }
+}
+
+/* Affichage des gains */
+#earningsDisplay {
     display: flex;
     justify-content: center;
     /* Centrer horizontalement */
     align-items: center;
     /* Centrer verticalement */
-
-    /* Ou pour un dégradé : */
-    background-image: linear-gradient(45deg, #d4d4d4, #e6d3b3);
-    color: #333;
-    /* Couleur du texte */
+    text-align: center;
+    font-size: 2em;
+    /* Augmenter la taille du texte */
+    font-weight: bold;
+    color: #000000;
+    /* Couleur noire en mode clair */
+    animation: bubblePop 0s ease-out;
+    /* Applique l'animation */
 }
+
+/* Mode sombre pour l'affichage des gains */
+html.dark-mode #earningsDisplay {
+    color: #ffffff;
+    /* Couleur blanche pour le mode sombre */
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    /* Ajoute un léger halo lumineux autour du texte */
+}
+
+
+
+
+
+/* scrolling bar */
+#scrolling-bar {
+    position: fixed;
+    top: 0;
+    height: 50px;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    overflow-x: hidden;
+    z-index: 1000;
+}
+
+#message-container {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    /* Optimisation des performances */
+}
+
+@keyframes scrollMessage {
+    0% {
+        transform: translateX(100vw);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.message {
+    display: inline-block;
+    padding: 0 200px;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+
+
+/* Bouton Paramètre */
+.setting-btn {
+    width: 45px;
+    position: fixed;
+    height: 45px;
+    bottom: 80px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: rgb(129, 110, 216);
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0px 0px 0px 2px rgb(212, 209, 255);
+}
+
+.bar {
+    width: 50%;
+    height: 2px;
+    background-color: rgb(229, 229, 229);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 2px;
+}
+
+.bar::before {
+    content: "";
+    width: 2px;
+    height: 2px;
+    background-color: rgb(126, 117, 255);
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid white;
+    transition: all 0.3s;
+    box-shadow: 0px 0px 5px white;
+}
+
+.bar1::before {
+    transform: translateX(-4px);
+}
+
+.bar2::before {
+    transform: translateX(4px);
+}
+
+.setting-btn:hover .bar1::before {
+    transform: translateX(4px);
+}
+
+.setting-btn:hover .bar2::before {
+    transform: translateX(-4px);
+}
+
+/* Style pour la notification */
+#notification {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 15px;
+    opacity: 0;
+    /* Commence invisible */
+    visibility: hidden;
+    /* Caché au départ */
+    z-index: 1000;
+    transition: opacity 0.2s ease-in-out, visibility 0s 0.2s;
+    /* 1 seconde pour le fondu */
+}
+
+/* Animation pour afficher la notification */
+#notification.show {
+    opacity: 1;
+    /* Rendre visible */
+    visibility: visible;
+    /* Rendre l'élément visible */
+    transition: opacity 0.2s ease-in-out, visibility 0s;
+    /* 1 seconde pour le fondu */
+}
+
+/* Animation pour faire disparaître la notification */
+#notification.hide {
+    opacity: 0;
+    /* Rendre invisible */
+    visibility: hidden;
+    /* Rendre invisible */
+    transition: opacity 0.2s ease-in-out, visibility 0s 0.2s;
+    /* 1 seconde pour le fondu */
+}
+
+/* Mode sombre pour la notification */
+html.dark-mode #notification {
+    background-color: #1c1c1c;
+    /* Fond sombre */
+    color: #ffffff;
+    /* Texte clair */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Bordure subtile */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    /* Ombre plus prononcée */
+}
+
+
+
+

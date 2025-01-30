@@ -2,34 +2,63 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    /* Aligne le contenu du haut de la page */
     min-height: 100vh;
-    /* S'assure que le body prend toute la hauteur de l'écran */
     margin: 0;
     font-family: Arial, sans-serif;
     background-image: linear-gradient(45deg, #d4d4d4, #e6bbb3);
-    /* Applique le dégradé */
     background-size: cover;
-    /* Assure que l'arrière-plan couvre toute la page sans répétition */
     background-attachment: fixed;
-    /* L'arrière-plan ne défile pas avec le contenu */
 }
 
+/* Mode sombre pour le body */
+html.dark-mode body {
+    background-image: linear-gradient(45deg, #0a0a0a, #2c3e50);
+    color: #fff;
+}
+
+/* Conteneur avec le même fond */
 .container {
     padding: 20px;
     width: 100%;
-    /* Prendre toute la largeur */
     max-width: 600px;
-    /* Limite la largeur du contenu */
     margin-top: 30px;
-    /* Ajoute un peu d'espace en haut */
     box-sizing: border-box;
-    /* Assure que le padding ne dépasse pas de la largeur */
     margin-left: 150px;
+    background-image: linear-gradient(45deg, #d4d4d4, #e6bbb3);
+    /* Dégradé en mode clair */
+    background-size: cover;
+    background-attachment: fixed;
 }
 
+/* Mode sombre pour le conteneur */
+html.dark-mode .container {
+    background-image: linear-gradient(45deg, #0a0a0a, #2c3e50);
+    /* Dégradé en mode sombre */
+}
+
+/* input */
 input {
     max-width: 100px;
+    background-color: #ffffff;
+    /* Fond blanc */
+    color: #333333;
+    /* Texte sombre */
+    border: 1px solid #cccccc;
+    /* Bordure grise */
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    /* Transition fluide */
+}
+
+/* Style en mode sombre */
+html.dark-mode input {
+    background-color: #444444;
+    /* Fond sombre */
+    color: #ffffff;
+    /* Texte clair */
+    border: 1px solid #666666;
+    /* Bordure plus claire que le fond */
 }
 
 /* form days */
@@ -108,25 +137,79 @@ input {
 
 
 
+/* Mode sombre pour le formulaire */
+html.dark-mode .my-form {
+    --_clr-primary: #a0a0a0;
+    /* Couleur principale en mode sombre */
+    --_clr-hover: #ff6ec7;
+    /* Couleur au survol en mode sombre */
+    --_clr-checked: #6eb5ff;
+    /* Couleur cochée en mode sombre */
+}
+
+html.dark-mode .my-form label {
+    color: var(--_clr-primary);
+    /* Texte en mode sombre */
+}
+
+html.dark-mode .my-form input[type="checkbox"] {
+    border-color: var(--_clr-primary);
+    /* Bordure en mode sombre */
+}
+
+html.dark-mode .my-form input[type="checkbox"]::after {
+    color: var(--_clr-checked);
+    /* Icône cochée en mode sombre */
+}
+
+html.dark-mode .my-form label:hover,
+html.dark-mode .my-form input[type="checkbox"]:focus-visible,
+html.dark-mode .my-form input[type="checkbox"]:focus-visible+label,
+html.dark-mode .my-form input[type="checkbox"]:hover,
+html.dark-mode .my-form input[type="checkbox"]:hover+label {
+    --_clr-current: var(--_clr-hover);
+    /* Couleur au survol en mode sombre */
+}
+
+html.dark-mode .my-form input[type="checkbox"]:focus-visible::after,
+html.dark-mode .my-form input[type="checkbox"]:hover::after {
+    opacity: 0.5;
+    color: var(--_clr-hover);
+    /* Icône au survol en mode sombre */
+}
+
+html.dark-mode .my-form input[type="checkbox"]:checked+label:not(:hover),
+html.dark-mode .my-form input[type="checkbox"]:checked:not(:hover) {
+    --_clr-current: var(--_clr-checked);
+    /* Couleur cochée en mode sombre */
+}
+
+
+
 /* Bouton sauvegarder */
 .bookmarkBtn {
     width: 100px;
     height: 40px;
     border-radius: 40px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    background-color: #333; /* Gris foncé */
+    background-color: #333;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition-duration: 0.3s;
     overflow: hidden;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 1000;
 }
+
+/* Conteneur de l'icône */
 .IconContainer {
     width: 30px;
     height: 30px;
     background: linear-gradient(to bottom, #f7b5b5, #c8a7a7);
-    /* Dégradé rose doux et beige */
     border-radius: 50px;
     display: flex;
     align-items: center;
@@ -135,27 +218,35 @@ input {
     z-index: 2;
     transition-duration: 0.3s;
 }
+
+/* Icône */
 .icon {
     border-radius: 1px;
 }
 
+/* Texte */
 .text {
-    height: 100%;
-    width: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
+    width: 100%;
     color: white;
     z-index: 1;
-    transition-duration: 0.3s;
     font-size: 1.04em;
+    text-align: center;
+    line-height: 40px;
+    margin: 0;
+    padding: 0;
 }
 
+/* Animation hover sur le conteneur de l'icône */
 .bookmarkBtn:hover .IconContainer {
     width: 90px;
     transition-duration: 0.3s;
 }
 
+/* Animation hover sur le texte */
 .bookmarkBtn:hover .text {
     transform: translate(10px);
     width: 0;
@@ -163,7 +254,29 @@ input {
     transition-duration: 0.3s;
 }
 
+/* Animation au clic */
 .bookmarkBtn:active {
     transform: scale(0.95);
     transition-duration: 0.3s;
+}
+
+
+/* Mode sombre pour le bouton */
+html.dark-mode .bookmarkBtn {
+    background-color: rgb(12, 12, 12);
+    /* Fond sombre */
+    border: 1px solid rgba(255, 255, 255, 0.349);
+    /* Bordure claire */
+}
+
+/* Mode sombre pour le conteneur de l'icône */
+html.dark-mode .IconContainer {
+    background: linear-gradient(to bottom, rgb(255, 136, 255), rgb(172, 70, 255));
+    /* Dégradé coloré */
+}
+
+/* Mode sombre pour le texte */
+html.dark-mode .text {
+    color: white;
+    /* Texte blanc */
 }
