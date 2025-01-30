@@ -1,17 +1,14 @@
-let messages = [];
-
-// Fonction pour charger les messages à partir du fichier JSON
-function loadMessages() {
+// Fonction pour charger un message aléatoire à partir du fichier JSON
+function loadRandomMessage() {
     fetch('messages.json')
         .then(response => response.json())
         .then(data => {
-            // Sélectionner des messages
-            messages = data.messages;
+            // Sélectionner un message aléatoire
+            let messages = data.messages;
             if (messages.length > 0) {
-                // Mélanger les messages de manière aléatoire
-                shuffleArray(messages);
-                // Afficher les messages dans la barre
-                displayMessages(messages);
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                // Afficher le message dans la barre de défilement
+                displayMessage(randomMessage);
             }
         })
         .catch(error => {
@@ -19,37 +16,22 @@ function loadMessages() {
         });
 }
 
-// Fonction pour mélanger un tableau de messages
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; // Echange des éléments
-    }
-}
-
-// Fonction pour afficher les messages dans la barre de défilement
-function displayMessages(messages) {
+// Fonction pour afficher le message dans la barre de défilement
+function displayMessage(message) {
     const messageContainer = document.getElementById('message-container');
     messageContainer.innerHTML = ''; // Réinitialiser le conteneur
 
-    // Ajouter les messages dans le conteneur
-    messages.forEach(message => {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message');
-        messageElement.textContent = message;
-        messageContainer.appendChild(messageElement);
-    });
+    // Créer un élément div pour le message
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message');
+    messageElement.textContent = message;
+    messageContainer.appendChild(messageElement);
 
-    // Dupliquer les messages pour un effet de défilement continu
-    for (let i = 0; i < 2; i++) {
-        messages.forEach(message => {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.textContent = message;
-            messageContainer.appendChild(messageElement);
-        });
-    }
+    // Déterminer la largeur du message et ajuster l'animation
+    const messageWidth = messageElement.offsetWidth;
+    const animationDuration = (messageWidth / 10) * 0.1; // Ajuste la durée de l'animation en fonction de la largeur du message
+    messageContainer.style.animationDuration = `${animationDuration}s`;
 }
 
-// Charger les messages au démarrage
-loadMessages();
+// Charger un message aléatoire au démarrage
+loadRandomMessage();
