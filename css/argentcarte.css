@@ -1,10 +1,10 @@
 /* Carte principale argent */
 .card {
     width: 190px;
-    height: 254px;
+    height: 200px;
     background-image: linear-gradient(163deg, #f2c9b6, #ce8b56);
     /* Dégradé doux */
-    border-radius: 20px;
+    border-radius: 50px;
     transition: all .3s ease-in-out;
     display: flex;
     justify-content: center;
@@ -18,11 +18,25 @@
 /* Style pour la deuxième carte */
 .card2 {
     width: 190px;
-    height: 254px;
-    background-color: #1a1a1a;
+    height: 200px;
+    background-image: linear-gradient(163deg, #f2c9b6, #d4ab6a);
     /* Carte sombre */
-    border-radius: 20px;
-    transition: all .2s ease-in-out;
+
+    display: flex;
+    justify-content: center;
+        /* Centrer horizontalement */
+    align-items: center;
+        /* Centrer verticalement */
+    text-align: center;
+    font-size: 2rem;
+    /* Gris doux pour un contraste plus agréable */
+    font-weight: bold;
+    border-radius: 50px;
+    padding: 5px 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    /* Ombre douce */
+    transition: all 0.3s ease-in-out;
+    /* Transition fluide */
 }
 
 /* Effet de survol pour la carte principale */
@@ -39,35 +53,3 @@
     /* Réduire légèrement */
 }
 
-/* Style pour l'affichage de l'argent dans la carte */
-.money-display {
-    font-size: 2rem;
-    /* Taille du texte */
-    color: #4e4e4e;
-    /* Gris doux pour un contraste plus agréable */
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    /* Centrer horizontalement */
-    align-items: center;
-    /* Centrer verticalement */
-    text-align: center;
-    border-radius: 10px;
-    padding: 15px 25px;
-    background-image: linear-gradient(163deg, #f2c9b6, #d4ab6a);
-    /* Dégradé qui s'harmonise avec la carte */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    /* Ombre douce */
-    transition: all 0.3s ease-in-out;
-    /* Transition fluide */
-}
-
-/* Effet au survol de l'affichage de l'argent */
-.money-display:hover {
-    background-image: linear-gradient(163deg, #d4ab6a, #f2c9b6);
-    /* Inverser légèrement le dégradé pour un effet visuel */
-    transform: scale(1.05);
-    /* Agrandir légèrement */
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
-    /* Ombre plus marquée */
-}

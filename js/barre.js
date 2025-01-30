@@ -1,14 +1,14 @@
-// Fonction pour charger un message aléatoire à partir du fichier JSON
-function loadRandomMessage() {
+// Fonction pour charger des messages aléatoires à partir du fichier JSON
+function loadRandomMessages() {
     fetch('messages.json')
         .then(response => response.json())
         .then(data => {
-            // Sélectionner un message aléatoire
+            // Sélectionner plusieurs messages aléatoires
             let messages = data.messages;
             if (messages.length > 0) {
-                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-                // Afficher le message dans la barre de défilement
-                displayMessage(randomMessage);
+                const randomMessages = getRandomMessages(messages, 50); // Afficher 5 messages à la fois
+                // Afficher les messages dans la barre de défilement
+                displayMessages(randomMessages);
             }
         })
         .catch(error => {
@@ -16,22 +16,34 @@ function loadRandomMessage() {
         });
 }
 
-// Fonction pour afficher le message dans la barre de défilement
-function displayMessage(message) {
+// Fonction pour sélectionner des messages aléatoires
+function getRandomMessages(messages, count) {
+    const shuffledMessages = [...messages].sort(() => Math.random() - 0.5); // Mélanger les messages
+    return shuffledMessages.slice(0, count); // Sélectionner les premiers `count` messages
+}
+
+// Fonction pour afficher les messages dans la barre de défilement
+function displayMessages(messages) {
     const messageContainer = document.getElementById('message-container');
     messageContainer.innerHTML = ''; // Réinitialiser le conteneur
 
-    // Créer un élément div pour le message
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message');
-    messageElement.textContent = message;
-    messageContainer.appendChild(messageElement);
+    // Dupliquer les messages pour un défilement infini
+    const duplicatedMessages = [...messages, ...messages]; // Dupliquer les messages
 
-    // Déterminer la largeur du message et ajuster l'animation
-    const messageWidth = messageElement.offsetWidth;
-    const animationDuration = (messageWidth / 10) * 0.1; // Ajuste la durée de l'animation en fonction de la largeur du message
+    // Ajouter les messages dans le conteneur
+    duplicatedMessages.forEach(message => {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.textContent = message;
+        messageContainer.appendChild(messageElement);
+    });
+
+    // Déterminer la largeur totale des messages et ajuster l'animation
+    const totalWidth = Array.from(messageContainer.children).reduce((sum, element) => sum + element.offsetWidth, 0);
+    const screenWidth = window.innerWidth;
+    const animationDuration = ((totalWidth + screenWidth) / 100) * 0.25; // Ajustez le coefficient (0.5) pour contrôler la vitesse
     messageContainer.style.animationDuration = `${animationDuration}s`;
 }
 
-// Charger un message aléatoire au démarrage
-loadRandomMessage();
+// Charger des messages aléatoires au démarrage
+loadRandomMessages();

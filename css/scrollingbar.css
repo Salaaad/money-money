@@ -17,22 +17,21 @@
 
 /* Style du conteneur des messages */
 #message-container {
-    display: inline-block;
-    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
     animation: scrollMessage linear infinite;
-    /* Retirer la durée fixe, elle sera calculée dynamiquement */
 }
 
 /* Animation pour faire défiler les messages de droite à gauche */
 @keyframes scrollMessage {
     0% {
         transform: translateX(100%);
-        /* Démarre à droite */
+        /* Commence à droite de l'écran */
     }
 
     100% {
         transform: translateX(-100%);
-        /* Termine à gauche */
+        /* Défile jusqu'à ce que les messages disparaissent à gauche */
     }
 }
 
@@ -42,6 +41,6 @@
     display: inline-block;
     font-weight: bold;
     color: #fff;
-    font-size: 1.2rem;
-    /* Taille de texte plus grande pour que le message soit bien visible */
+    flex-shrink: 0;
+    /* Empêche les messages de rétrécir */
 }

@@ -1,0 +1,169 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Aligne le contenu du haut de la page */
+    min-height: 100vh;
+    /* S'assure que le body prend toute la hauteur de l'écran */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(45deg, #d4d4d4, #e6bbb3);
+    /* Applique le dégradé */
+    background-size: cover;
+    /* Assure que l'arrière-plan couvre toute la page sans répétition */
+    background-attachment: fixed;
+    /* L'arrière-plan ne défile pas avec le contenu */
+}
+
+.container {
+    padding: 20px;
+    width: 100%;
+    /* Prendre toute la largeur */
+    max-width: 600px;
+    /* Limite la largeur du contenu */
+    margin-top: 30px;
+    /* Ajoute un peu d'espace en haut */
+    box-sizing: border-box;
+    /* Assure que le padding ne dépasse pas de la largeur */
+    margin-left: 150px;
+}
+
+input {
+    max-width: 100px;
+}
+
+/* form days */
+.my-form {
+    --_clr-primary: #666;
+    --_clr-hover: #f33195;
+    --_clr-checked: #127acf;
+}
+
+.my-form>div {
+    --_clr-current: var(--_clr-primary);
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.my-form>div+div {
+    margin-block-start: 0.5rem;
+}
+
+.my-form label {
+    cursor: pointer;
+    color: var(--_clr-current);
+    transition: color 150ms ease-in-out;
+}
+
+/* styled checkbox */
+.my-form input[type="checkbox"] {
+    appearance: none;
+    outline: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    aspect-ratio: 1;
+    padding: 0.25rem;
+    background: transparent;
+    border: 1px solid var(--_clr-current);
+    border-radius: 2px;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+.my-form input[type="checkbox"]::after {
+    content: "\2714";
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+    color: var(--_clr-checked);
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.my-form label:hover,
+.my-form input[type="checkbox"]:focus-visible,
+.my-form input[type="checkbox"]:focus-visible+label,
+.my-form input[type="checkbox"]:hover,
+.my-form input[type="checkbox"]:hover+label {
+    --_clr-current: var(--_clr-hover);
+}
+
+.my-form input[type="checkbox"]:focus-visible::after,
+.my-form input[type="checkbox"]:hover::after {
+    opacity: 0.5;
+    color: var(--_clr-hover);
+}
+
+.my-form input[type="checkbox"]:checked+label:not(:hover),
+.my-form input[type="checkbox"]:checked:not(:hover) {
+    --_clr-current: var(--_clr-checked);
+}
+
+.my-form input[type="checkbox"]:checked::after {
+    opacity: 1;
+}
+
+
+
+
+/* Bouton sauvegarder */
+.bookmarkBtn {
+    width: 100px;
+    height: 40px;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: #333; /* Gris foncé */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+}
+.IconContainer {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(to bottom, #f7b5b5, #c8a7a7);
+    /* Dégradé rose doux et beige */
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 2;
+    transition-duration: 0.3s;
+}
+.icon {
+    border-radius: 1px;
+}
+
+.text {
+    height: 100%;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 1;
+    transition-duration: 0.3s;
+    font-size: 1.04em;
+}
+
+.bookmarkBtn:hover .IconContainer {
+    width: 90px;
+    transition-duration: 0.3s;
+}
+
+.bookmarkBtn:hover .text {
+    transform: translate(10px);
+    width: 0;
+    font-size: 0;
+    transition-duration: 0.3s;
+}
+
+.bookmarkBtn:active {
+    transform: scale(0.95);
+    transition-duration: 0.3s;
+}
