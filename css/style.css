@@ -1,0 +1,20 @@
+/* Centrage du contenu */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    /* Centrer horizontalement */
+    align-items: center;
+    /* Centrer verticalement */
+
+    /* Ou pour un dégradé : */
+    background-image: linear-gradient(45deg, #d4d4d4, #e6d3b3);
+    color: #333;rgb(195, 185, 41)rgb(223, 212, 56)rgb(223, 103, 56)rgb(198, 78, 31)
+    /* Couleur du texte */
+}

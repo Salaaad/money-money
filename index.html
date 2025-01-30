@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Salaire</title>
+
+    <!-- Lien vers le fichier CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="css/argentcarte.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/scrollingbar.css">
+    <link rel="stylesheet" href="css/settingsbutton.css">
+</head>
+
+<body>
+    <!-- Barre de défilement en haut de la page -->
+    <div id="scrolling-bar">
+        <div id="message-container"></div>
+    </div>
+
+<div class="card">
+    <div class="money-display" id="moneyDisplay">0.00 €</div>
+</div>
+
+
+    <!-- Lien vers les paramètres -->
+    <a href="parametres.html" class="setting-btn">
+        <span class="bar bar1"></span>
+        <span class="bar bar2"></span>
+        <span class="bar bar1"></span>
+    </a>
+
+    <!-- Zone de notification -->
+    <div id="notification">Salaire sauvegardé !</div>
+
+    <!-- Lien vers le fichier JS pour la barre de messages défilants -->
+    <script src="js/barre.js"></script>
+
+    <!-- Lien vers le fichier JS pour le calcul du salaire -->
+    <script src="js/argent.js"></script>
+
+    <!-- Lien vers le fichier JS de Bootstrap (composants interactifs) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+// Afficher la notification si le salaire vient d'être sauvegardé
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('saved')) {
+    const notification = document.getElementById('notification');
+
+    // Ajouter la classe 'show' pour afficher la notification avec l'effet de fade
+    notification.classList.add('show');
+
+    // Après 2 secondes, commencer à masquer la notification
+    setTimeout(() => {
+        notification.classList.remove('show'); // Retirer la classe 'show'
+        notification.classList.add('hide'); // Ajouter la classe 'hide' pour l'effet de disparition
+    }, 2000); // Délai de 2 secondes avant de commencer à masquer
+
+    // Après l'animation de disparition (500ms), réinitialiser l'état de la notification
+    setTimeout(() => {
+        notification.classList.remove('hide'); // Retirer la classe 'hide' pour réinitialiser
+    }, 2500); // Attendre 2.5 secondes avant de réinitialiser (2000ms + 500ms d'animation)
+}
+
+
+    </script>
+</body>
+
+</html>
